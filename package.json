@@ -1,0 +1,26 @@
+{
+  "name": "fxclient-desktop",
+  "version": "1.0.0",
+  "description": "FXClient for the desktop",
+  "license": "MIT",
+  "author": "imsuck",
+  "type": "module",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "app:dir": "electron-builder --dir",
+    "app:dist": "electron-builder"
+  },
+  "build": {
+    "linux": {
+      "target": ["AppImage"]
+    },
+    "appImage": {
+      "description": "First ever client for Territorial.io!"
+    }
+  },
+  "devDependencies": {
+    "electron": "^38.1.0",
+    "electron-builder": "^26.0.12"
+  }
+}

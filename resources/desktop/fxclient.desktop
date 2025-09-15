@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version = 1.0
+Name = FXClient
+Exec = fxclient-desktop-1.0.0.AppImage
+Icon = fxclient
+Type = Application
+Terminal = false
