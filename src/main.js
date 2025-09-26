@@ -1,13 +1,50 @@
-import { app, BrowserWindow } from "electron/main";
+import { app, BrowserWindow, Menu, MenuItem } from "electron/main";
 import * as path from "path";
 
+let mainWindow = null;
+
 function createWindow() {
-  const win = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     autoHideMenuBar: true,
   });
 
-  win.loadURL("https://fxclient.github.io/FXclient/");
+  mainWindow.loadURL("https://fxclient.github.io/FXclient/");
+
+  mainWindow.on("closed", () => {
+    mainWindow = null;
+  });
 }
+
+let mainMenu = new Menu;
+
+if (process.platform === 'darwin') {
+  const appMenu = new MenuItem({ role: 'appMenu' })
+  mainMenu.append(appMenu)
+}
+
+const submenu = Menu.buildFromTemplate([
+  {
+    label: "Open FXClient",
+    click: () => {
+      if (mainWindow) {
+        mainWindow.loadURL("https://fxclient.github.io/FXclient/");
+      }
+    },
+    accelerator: "F3",
+  },
+  {
+    label: "Open territorial.io",
+    click: () => {
+      if (mainWindow) {
+        mainWindow.loadURL("https://territorial.io/");
+      }
+    },
+    accelerator: "F4",
+  },
+]);
+mainMenu.append(new MenuItem({ label: "FXClient", submenu }))
+
+Menu.setApplicationMenu(mainMenu)
 
 app.whenReady().then(() => {
   createWindow();
