@@ -13,6 +13,22 @@ function createWindow() {
   mainWindow.on("closed", () => {
     mainWindow = null;
   });
+
+  mainWindow.webContents.on('did-finish-load', () => {
+    const css = `
+      /* hide propaganda */
+      body > div[style^="position: fixed"] {
+        display: none;
+      }
+    `;
+    mainWindow.webContents.insertCSS(css)
+      .then(key => {
+        console.log('CSS injected with key:', key);
+      })
+      .catch(error => {
+        console.error('Error injecting CSS:', error);
+      });
+  });
 }
 
 let mainMenu = new Menu;
@@ -40,6 +56,15 @@ const submenu = Menu.buildFromTemplate([
       }
     },
     accelerator: "F4",
+  },
+  {
+    label: "Open DevTools",
+    click: () => {
+      if (mainWindow) {
+        mainWindow.webContents.openDevTools();
+      }
+    },
+    accelerator: "CmdOrCtrl+Shift+I",
   },
 ]);
 mainMenu.append(new MenuItem({ label: "FXClient", submenu }))
