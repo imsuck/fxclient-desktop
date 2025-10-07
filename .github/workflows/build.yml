@@ -28,7 +28,7 @@ jobs:
 
       - name: Build client
         run: |
-          npm run app:dist
+          npm run app:dist -- --publish=never
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
