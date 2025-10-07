@@ -17,7 +17,7 @@ function createWindow() {
   mainWindow.webContents.on('did-finish-load', () => {
     const css = `
       /* hide propaganda */
-      body > div[style^="position: fixed"] {
+      body > div[style*="0.6"][style$="z-index: 6;"] {
         display: none;
       }
     `;
