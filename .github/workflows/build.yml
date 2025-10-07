@@ -26,14 +26,8 @@ jobs:
         run: |
           npm ci
 
-      - name: Build client
+      - name: Build client and release if draft exists
         run: |
-          npm run app:dist -- --publish=never
+          npm run app:dist
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.os }}-build
-          path: dist/
