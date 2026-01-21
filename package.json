@@ -12,6 +12,12 @@
     "app:dist": "electron-builder"
   },
   "build": {
+    "asar": {
+      "smartUnpack": false
+    },
+    "electronLanguages": ["en-US"],
+    "npmRebuild": true,
+    "nodeGypRebuild": false,
     "linux": {
       "target": ["AppImage"]
     },
@@ -20,7 +26,7 @@
     }
   },
   "devDependencies": {
-    "electron": "^38.1.0",
-    "electron-builder": "^26.0.12"
+    "electron": "^40.0.0",
+    "electron-builder": "^26.4.0"
   }
 }
